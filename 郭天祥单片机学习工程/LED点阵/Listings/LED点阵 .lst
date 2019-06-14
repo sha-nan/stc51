@@ -1,0 +1,119 @@
+C51 COMPILER V9.57.0.0   LED_____                                                          06/18/2018 22:07:23 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE LED_____
+OBJECT MODULE PLACED IN .\Objects\LED点阵 .obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LED点阵 .c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -LED点阵 .lst) OBJECT(.\Objects\LED点阵 .obj)
+
+line level    source
+
+   1          
+   2          //该板子上的点阵为8*8，只能显示简单的一些汉子，如果要显示真正的汉字
+   3          //通过取模软件取的可以选择16*16点阵的板子
+   4          
+   5          #include<reg51.h>
+   6          #include<intrins.h>
+   7          
+   8          sbit SRCLK=P3^6;
+   9          sbit RCLK=P3^5;
+  10          sbit SER=P3^4;
+  11          
+  12          //--定义要使用的IO口--//
+  13          #define COMMONPORTS             P0
+  14          
+  15          //--列选通控制--//
+  16          unsigned char code TAB[8]  = {0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+  17          
+  18          //--点阵字码--//
+  19          unsigned char code CHARCODE[5][8]=
+  20          {
+  21                                                                  0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF, 
+  22                                                                  0xC3,0xE7,0xE7,0xE7,0xE7,0xE7,0xC3,0xFF, 
+  23                                                                  0x99,0x00,0x00,0x00,0x81,0xC3,0xE7,0xFF,
+  24                                                                  0x99,0x99,0x99,0x99,0x99,0x81,0xC3,0xFF,
+  25                                                                  0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
+  26          };
+  27          void delay(unsigned int time)
+  28          {
+  29   1        unsigned int i,j;
+  30   1        for(i=0;i<time;i++)
+  31   1          for(j=0;j<121;j++);
+  32   1      }
+  33          
+  34          /*******************************************************************************
+  35          * 函数名         : Hc595SendByte(unsigned char dat)
+  36          * 函数功能                 : 想74H595发送一个字节的数据
+  37          * 输入           : 无
+  38          * 输出           : 无
+  39          *******************************************************************************/
+  40          void Hc595SendByte(unsigned char dat)
+  41          {
+  42   1              unsigned char a;
+  43   1              SRCLK=0;
+  44   1              RCLK=0;
+  45   1              for(a=0;a<8;a++)
+  46   1              {
+  47   2                      SER=dat>>7;
+  48   2                      dat<<=1;
+  49   2      
+  50   2                      SRCLK=1;
+  51   2                      _nop_();
+  52   2                      _nop_();
+  53   2                      SRCLK=0;        
+  54   2              }
+C51 COMPILER V9.57.0.0   LED_____                                                          06/18/2018 22:07:23 PAGE 2   
+
+  55   1      
+  56   1              RCLK=1;
+  57   1              _nop_();
+  58   1              _nop_();
+  59   1              RCLK=0;
+  60   1      }
+  61          /*******************************************************************************
+  62          * 函数名         : main
+  63          * 函数功能                 : 主函数
+  64          * 输入           : 无
+  65          * 输出           : 无
+  66          *******************************************************************************/
+  67          
+  68          void main()
+  69          {       
+  70   1              unsigned char tab, j;
+  71   1              unsigned int  i;
+  72   1      
+  73   1              while(1)
+  74   1              {       
+  75   2                      for(i= 0; i<50; i++ )   //两个字之间的扫描间隔时间
+  76   2                      {
+  77   3                              for(tab=0;tab<8;tab++)
+  78   3                              {       
+  79   4      
+  80   4                                      Hc595SendByte(0x00);                         //消隐                                                                                                                             
+  81   4                                      COMMONPORTS     = TAB[tab];                              //输出字码     
+  82   4                                      Hc595SendByte(CHARCODE[j][tab]);        
+  83   4                                      delay(2);               
+  84   4                              }
+  85   3                               
+  86   3                      }
+  87   2                      j++;
+  88   2                      if(j == 4)
+  89   2                      {
+  90   3                              j = 0;
+  91   3                      }
+  92   2              }       
+  93   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    160    ----
+   CONSTANT SIZE    =     48    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

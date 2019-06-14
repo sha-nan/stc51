@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"循环计时.obj" 
+TO "循环计时" 
+RAMSIZE(256) 

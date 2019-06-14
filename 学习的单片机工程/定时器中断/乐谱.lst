@@ -1,0 +1,95 @@
+C51 COMPILER V9.52.0.0   ____                                                              09/05/2018 16:28:35 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE ____
+OBJECT MODULE PLACED IN .\乐谱.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\..\..\Downloads\乐谱.c BROWSE DEBUG OBJECTEXTEND PRINT(.\乐谱.lst) OB
+                    -JECT(.\乐谱.obj)
+
+line level    source
+
+   1                              /*12Mhz晶振工作*/
+   2          #include <reg51.h>
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          sbit voice=P1^5;
+   6          uchar code sound[]={0xff,
+   7                              0x60,0x10,0x55,0x10,0x4c,0x10,0x40,0x10,0x39,0x10,0x33,0x10,0x30,0x10,
+   8                              0x2b,0x10,0x26,0x10,0x24,0x10,0x20,0x10,0x1c,0x10,0x19,0x10,0x18,0x10,
+   9                              0x15,0x10,0x13,0x10,0x12,0x10,0x10,0x10,0x0e,0x10,0x0d,0x10,0x00,
+  10                             };
+  11          uchar zdjs=0, jp;
+  12          del(yj);
+  13          void main(void)
+  14            {
+  15   1            uint dpjs=0;
+  16   1            uchar yj;
+  17   1            TMOD=0x01,IE=0x82;
+  18   1            TH0=0xd8, TL0=0xef;
+  19   1         TR0=1;
+  20   1      while(1)
+  21   1         {  
+  22   2            zdjs=0;
+  23   2            dpjs++; yj=sound[dpjs]; 
+  24   2           dpjs++; jp=sound[dpjs];
+  25   2         while(zdjs!=jp)
+  26   2             { 
+  27   3            if(yj!=0xff)
+  28   3         {
+  29   4                   if(yj!=0)
+  30   4                     {
+  31   5                   voice=!voice;
+  32   5                       del(yj);
+  33   5                      }
+  34   4                      else
+  35   4                {
+  36   5                dpjs=0; 
+  37   5                            break;
+  38   5                           }
+  39   4          }
+  40   3          else
+  41   3            {
+  42   4              voice=0;
+  43   4                       del(jp);
+  44   4          }
+  45   3            }
+  46   2             }
+  47   1         }
+  48          time0() interrupt 1  using 1
+  49                {
+  50   1               TH0=0xd8, TL0=0xef;
+  51   1               zdjs++;
+  52   1                 }
+  53          del(yj)
+  54              {
+C51 COMPILER V9.52.0.0   ____                                                              09/05/2018 16:28:35 PAGE 2   
+
+  55   1            uchar yj2=2;
+  56   1             while(yj!=0)
+  57   1               {      
+  58   2                     while(yj2!=0)
+  59   2                        {
+  60   3                           yj2--;
+  61   3                           }
+  62   2                        yj2=2;
+  63   2                   yj--;  
+  64   2             }
+  65   1         
+  66   1           }
+  67          /*                                 凌志电子编制                    */
+  68          /*                            2018年9月5日16时26分43秒                  */
+*** WARNING C290 IN LINE 66 OF ..\..\..\Downloads\乐谱.c: missing return value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    140    ----
+   CONSTANT SIZE    =     42    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

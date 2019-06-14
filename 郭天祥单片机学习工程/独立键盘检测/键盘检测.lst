@@ -1,0 +1,151 @@
+C51 COMPILER V9.52.0.0   ________                                                          09/08/2018 18:00:40 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE ________
+OBJECT MODULE PLACED IN .\º¸≈ÃºÏ≤‚.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c BROWSE DEBUG OBJECTEXTEND PRINT(.\º¸≈ÃºÏ≤‚.ls
+                    -t) OBJECT(.\º¸≈ÃºÏ≤‚.obj)
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #define uint unsigned int
+   3          #define uchar unsigned char
+   4          
+   5          sbit LSA=P2^2;
+   6          sbit LSB=P2^3;
+   7          sbit LSC=P2^4;
+   8          sbit k1=P3^0;
+   9          sbit k2=P3^1;
+  10          sbit k3=P3^2;
+  11          sbit k4=P3^3;
+  12          
+  13          uchar code smgduan[]={0x3F,0x06,0x5B,0x4F,
+  14                                                    0x66,0x6D,0x7D,0x07,
+  15                                                    0x7F,0x6F,0x77,0x7C,
+  16                                                    0x39,0x5E,0x79,0x71};
+  17          
+  18          void delayxms(uint);//—” ±∫Ø ˝…˘√˜
+  19          uchar numt0,num;// ˝æ›¿‡–Õ…˘√˜
+  20          void display(uchar numdis)// ˝¬Îπ‹œ‘ æ∫Ø ˝
+  21          {
+  22   1              uchar shi,ge;/ ˝æ›¿‡–Õ…˘√˜
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xCA skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xBE skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xDD skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xC0 skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xE0 skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xD0 skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xCD skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xC9 skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xF9 skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xC3 skipped
+*** ERROR C100 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: unprintable character 0xF7 skipped
+*** ERROR C141 IN LINE 22 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: syntax error near '/'
+  23   1              shi=numdis/10;//∞—“ª∏ˆ ÆŒª ˝Ω¯––∑÷¿Î
+  24   1              ge=numdis%10;
+  25   1              LSA=1;
+  26   1              LSB=0;
+  27   1              LSC=0;
+  28   1              P0=smgduan[shi];
+  29   1              delayxms(5);
+  30   1              LSA=0;
+  31   1              LSB=0;
+  32   1              LSC=0;
+  33   1              P0=smgduan[ge];
+  34   1              delayxms(5);
+  35   1      }
+  36          
+  37          void delayxms(uint xms)
+*** ERROR C141 IN LINE 37 OF ..\º¸≈ÃºÏ≤‚‘≠¿Ì\º¸≈ÃºÏ≤‚.c: syntax error near 'xms', expected ')'
+  38          {
+  39   1              uint i,j;
+  40   1              for(i=xms;i>0;i--)
+  41   1                      for(j=110;j>0;j--);
+C51 COMPILER V9.52.0.0   ________                                                          09/08/2018 18:00:40 PAGE 2   
+
+  42   1      }
+  43          
+  44          void init()
+  45          {
+  46   1              TMOD=0X01;
+  47   1              TH0=0X4C;
+  48   1              TL0=0X00;
+  49   1              EA=1;
+  50   1              ET0=1;
+  51   1      }
+  52          
+  53          void key()
+  54          {
+  55   1              if(k1==0)
+  56   1              {
+  57   2                      delayxms(10);
+  58   2                      if(k1==0)
+  59   2                      {
+  60   3                              num++;
+  61   3                              if(num==60)
+  62   3                              num=0;
+  63   3                              while(!k1);
+  64   3                      }
+  65   2              }
+  66   1              
+  67   1              if(k2==0)
+  68   1              {
+  69   2                      delayxms(10);
+  70   2                      if(k2==0)
+  71   2                      {
+  72   3                              if(num==0)
+  73   3                                      num=60;
+  74   3                                      num--;
+  75   3                                      while(!k2);
+  76   3                      }
+  77   2              }
+  78   1              
+  79   1              if(k3==0)
+  80   1              {
+  81   2                      delayxms(10);
+  82   2                      if(k3==0)
+  83   2                              {
+  84   3                                      num=0;
+  85   3                                      while(!k3);
+  86   3                              }
+  87   2              }
+  88   1              
+  89   1              if(k4==0)
+  90   1              {
+  91   2                      delayxms(10);
+  92   2                      if(k4==0)
+  93   2                      {       
+  94   3                              while(!k4);
+  95   3                              TR0=~TR0;
+  96   3                      }
+  97   2              }
+  98   1      }
+  99          
+ 100          void main()
+ 101          {
+ 102   1              init();
+ 103   1              while(1)
+C51 COMPILER V9.52.0.0   ________                                                          09/08/2018 18:00:40 PAGE 3   
+
+ 104   1              {
+ 105   2                      key();
+ 106   2                      display(num);
+ 107   2              }
+ 108   1      }
+ 109          
+ 110          void t0_time()interrupt 1
+ 111          {
+ 112   1              TH0=0X4C;
+ 113   1              TL0=0X00;
+ 114   1              numt0++;
+ 115   1              if(numt0==20)
+ 116   1              {
+ 117   2                      numt0=0;
+ 118   2                      num++;
+ 119   2                      if(num==60)
+ 120   2                      num=0;
+ 121   2              }
+ 122   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  13 ERROR(S)

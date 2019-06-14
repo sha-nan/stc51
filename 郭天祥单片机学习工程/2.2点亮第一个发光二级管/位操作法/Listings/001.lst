@@ -1,0 +1,30 @@
+C51 COMPILER V9.57.0.0   001                                                               05/24/2018 22:39:25 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 001
+OBJECT MODULE PLACED IN .\Objects\001.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 001.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\001.l
+                    -st) OBJECT(.\Objects\001.obj)
+
+line level    source
+
+   1          #include<reg52.h>
+   2          sbit led1=P2^0;
+   3          void main()
+   4          {
+   5   1              led1=0;
+   6   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      3    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

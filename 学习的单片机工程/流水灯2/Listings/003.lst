@@ -1,0 +1,45 @@
+C51 COMPILER V9.57.0.0   003                                                               04/20/2018 19:04:33 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 003
+OBJECT MODULE PLACED IN .\Objects\003.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 003.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\003.l
+                    -st) OBJECT(.\Objects\003.obj)
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #define uint unsigned int
+   3          #define led1 P2                                         //宏定义(定义P2口为led1)
+   4          unit;i,j;
+   5          void delayxms(unit);                            //声明子函数（注意声明变量类型）
+   6          void main()
+   7          {
+   8   1              while(1)                                                //大循环
+   9   1              {       
+  10   2                      led1=0xAA;                                      /*点亮发光二级管1，3，5，7*/    
+  11   2                      delayxms(100);                          //延时100毫秒
+  12   2                      led1=0X55;                                      /*点亮发光二级管2，4，6，8*/
+  13   2                      delayxms(100);                          //延时100毫秒
+  14   2              }
+  15   1      }
+  16          void delayxms(uint xms)                         //子函数体（注意声明变量类型）
+  17          {
+*** WARNING C235 IN LINE 17 OF 003.c: parameter 1: different types
+  18   1              for(i=xms;i>0;i--)                              //i=xms即延时约x毫秒
+  19   1                      for(j=110;j>0;j--);
+  20   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     70    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

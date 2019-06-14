@@ -1,0 +1,97 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\17849\µ¥Æ¬»ú¹¤³Ì\¹ùÌìÏéµ¥Æ¬»úÑ§Ï°¹¤³Ì\¾ØÕó¼üÅÌ¼ì²â\¾ØÕó¼üÅÌ¼ì²â.uvproj
+Project File Date:  09/08/2018
+
+<h2>Output:</h2>
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling ¾ØÕó¼üÅÌµÄ¼ì²â.c...
+¾ØÕó¼üÅÌµÄ¼ì²â.c(43): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(75): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(107): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(139): error C141: syntax error near 'case', expected ';'
+Target not created
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling ¾ØÕó¼üÅÌµÄ¼ì²â.c...
+¾ØÕó¼üÅÌµÄ¼ì²â.c(43): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(75): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(107): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(139): error C141: syntax error near 'case', expected ';'
+Target not created
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling ¾ØÕó¼üÅÌµÄ¼ì²â.c...
+¾ØÕó¼üÅÌµÄ¼ì²â.c(43): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(75): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(107): error C141: syntax error near 'case', expected ';'
+¾ØÕó¼üÅÌµÄ¼ì²â.c(139): error C141: syntax error near 'case', expected ';'
+Target not created
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling ¾ØÕó¼üÅÌµÄ¼ì²â.c...
+¾ØÕó¼üÅÌµÄ¼ì²â.c(159): warning C206: 'matrixkeycan': missing function-prototype
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?MATRIXKEYSCAN?______________
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  MATRIXKEYCAN
+    MODULE:  ¾ØÕó¼üÅÌµÄ¼ì²â.obj (______________)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MATRIXKEYCAN
+    MODULE:  ¾ØÕó¼üÅÌµÄ¼ì²â.obj (______________)
+    ADDRESS: 01ABH
+Program Size: data=11.0 xdata=0 code=431
+"¾ØÕó¼üÅÌ¼ì²â" - 0 Error(s), 4 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling ¾ØÕó¼üÅÌµÄ¼ì²â.c...
+¾ØÕó¼üÅÌµÄ¼ì²â.c(159): warning C206: 'matrixkeycan': missing function-prototype
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?MATRIXKEYSCAN?______________
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  MATRIXKEYCAN
+    MODULE:  ¾ØÕó¼üÅÌµÄ¼ì²â.obj (______________)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MATRIXKEYCAN
+    MODULE:  ¾ØÕó¼üÅÌµÄ¼ì²â.obj (______________)
+    ADDRESS: 01ABH
+Program Size: data=11.0 xdata=0 code=431
+creating hex file from "¾ØÕó¼üÅÌ¼ì²â"...
+"¾ØÕó¼üÅÌ¼ì²â" - 0 Error(s), 4 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling ¾ØÕó¼üÅÌµÄ¼ì²â.c...
+¾ØÕó¼üÅÌµÄ¼ì²â.c(171): warning C206: 'matrixkeycan': missing function-prototype
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?MATRIXKEYSCAN?______________
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  MATRIXKEYCAN
+    MODULE:  ¾ØÕó¼üÅÌµÄ¼ì²â.obj (______________)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MATRIXKEYCAN
+    MODULE:  ¾ØÕó¼üÅÌµÄ¼ì²â.obj (______________)
+    ADDRESS: 0195H
+Program Size: data=11.0 xdata=0 code=479
+creating hex file from "¾ØÕó¼üÅÌ¼ì²â"...
+"¾ØÕó¼üÅÌ¼ì²â" - 0 Error(s), 4 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling ¾ØÕó¼üÅÌµÄ¼ì²â.c...
+linking...
+Program Size: data=11.0 xdata=0 code=479
+creating hex file from "¾ØÕó¼üÅÌ¼ì²â"...
+"¾ØÕó¼üÅÌ¼ì²â" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling ¾ØÕó¼üÅÌµÄ¼ì²â.c...
+linking...
+Program Size: data=11.0 xdata=0 code=482
+creating hex file from "¾ØÕó¼üÅÌ¼ì²â"...
+"¾ØÕó¼üÅÌ¼ì²â" - 0 Error(s), 0 Warning(s).

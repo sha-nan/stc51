@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\串行口方式一编程.obj" 
+TO ".\Objects\串行口方式一编程" 
+PRINT(".\Listings\串行口方式一编程.m51") RAMSIZE(256) 

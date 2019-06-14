@@ -1,0 +1,174 @@
+C51 COMPILER V9.59.0.0   ____________                                                      09/13/2018 21:38:27 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE ____________
+OBJECT MODULE PLACED IN .\Objects\点阵流动显示.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 点阵流动显示.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\点阵流动显示.lst) OBJECT(.\Objects\点阵流动显示.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<intrins.h>
+   3          
+   4          sbit SRCLK=P3^6;
+   5          sbit RCLK=P3^5;
+   6          sbit SER=P3^4;
+   7          
+   8          //--定义要使用的IO口--//
+   9          #define COMMONPORTS             P0
+  10          
+  11          //--列选通控制--//
+  12          unsigned char code TAB[8]  = {0x7f,0xbf,0xdf,0xef,0xf7,0xfb,0xfd,0xfe};
+  13          
+  14          //--点阵字码--//
+  15          unsigned char code CHARCODE[30][8]=
+  16          {
+  17          
+  18                   {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00},  //动画帧1
+  19          
+  20               {0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x80},  //动画帧2
+  21          
+  22               {0x00,0xc0,0x80,0x80,0x80,0x80,0x80,0xc0},  //动画帧3
+  23          
+  24               {0x00,0xe0,0xc0,0xc0,0xc0,0xc0,0xc0,0xe0},  //动画帧4
+  25          
+  26               {0x00,0xf0,0x60,0x60,0x60,0x60,0x60,0xf0},  //动画帧5
+  27          
+  28              {0x00,0x78,0x30,0x30,0x30,0x30,0x30,0x78},  //动画帧6
+  29          
+  30              {0x00,0x3c,0x18,0x18,0x18,0x18,0x18,0x3c},  //动画帧7
+  31          
+  32              {0x00,0x1e,0x8c,0x8c,0x8c,0x0c,0x0c,0x1e},  //动画帧8
+  33                  
+  34                  {0x00,0x0F,0x86,0xC6,0xC6,0xC6,0x86,0x0F},  //动画帧9
+  35           
+  36          
+  37              {0x00,0xc7,0xe3,0xe3,0xe3,0xc3,0xc3,0x07},  //动画帧10
+  38          
+  39              {0x00,0x63,0xf1,0xf1,0xf1,0xE1,0xc1,0x83},  //动画帧11
+  40          
+  41              {0x00,0x31,0xf8,0xf8,0xf8,0xF0,0xe0,0xc1},  //动画帧12
+  42          
+  43              {0x00,0x98,0xfc,0xfc,0xfc,0xf8,0xf0,0x60},  //动画帧13
+  44          
+  45              {0x00,0xcc,0xfe,0xfe,0xfe,0xfc,0x78,0x30},  //动画帧14
+  46          
+  47              {0x00,0x66,0xff,0xff,0xff,0x7e,0x3c,0x18},  //动画帧15
+  48          
+  49              {0x00,0x33,0x7f,0x7f,0x7f,0x3f,0x1e,0x0c},  //动画帧16
+  50          
+  51              {0x00,0x19,0x3f,0x3f,0x3f,0x1f,0x0f,0x06},  //动画帧17
+  52          
+  53              {0x00,0x8c,0x9f,0x9f,0x9f,0x8f,0x87,0x03},      //动画帧18
+  54          
+C51 COMPILER V9.59.0.0   ____________                                                      09/13/2018 21:38:27 PAGE 2   
+
+  55              {0x00,0xc6,0xcf,0xcf,0xcf,0xc7,0xC3,0x81},  //动画帧19
+  56          
+  57              {0x00,0x63,0x67,0x67,0x67,0x63,0xe1,0xc0},  //动画帧20
+  58          
+  59              {0x00,0x31,0x33,0x33,0x33,0x31,0xf0,0xe0},  //动画帧21
+  60          
+  61              {0x00,0x98,0x99,0x99,0x99,0x98,0xf8,0xf0},  //动画帧22
+  62          
+  63              {0x00,0xcc,0xcc,0xcc,0xcc,0xcc,0xfc,0x78},  //动画帧23
+  64          
+  65              {0x00,0x66,0x66,0x66,0x66,0x66,0x7e,0x3c},  //动画帧24
+  66          
+  67              {0x00,0x33,0x33,0x33,0x33,0x33,0x3f,0x1e},  //动画帧25
+  68          
+  69              {0x00,0x19,0x19,0x19,0x19,0x19,0x1f,0x0f},  //动画帧26
+  70          
+  71              {0x00,0x0c,0x0c,0x0c,0x0c,0x0c,0x0f,0x07},  //动画帧27
+  72          
+  73              {0x00,0x06,0x06,0x06,0x06,0x06,0x07,0x03},  //动画帧28
+  74          
+  75              {0x00,0x03,0x03,0x03,0x03,0x03,0x03,0x01},  //动画帧29
+  76          
+  77              {0x00,0x01,0x01,0x01,0x01,0x01,0x01,0x00}   //动画帧30
+  78          
+  79          };
+  80          void delay(unsigned int time)
+  81          {
+  82   1        unsigned int i,j;
+  83   1        for(i=0;i<time;i++)
+  84   1          for(j=0;j<110;j++);
+  85   1      }
+  86          
+  87          /*******************************************************************************
+  88          * 函数名         : Hc595SendByte(unsigned char dat)
+  89          * 函数功能                 : 想74H595发送一个字节的数据
+  90          * 输入           : 无
+  91          * 输出           : 无
+  92          *******************************************************************************/
+  93          void Hc595SendByte(unsigned char dat)
+  94          {
+  95   1              unsigned char a;
+  96   1              SRCLK=0;
+  97   1              RCLK=0;
+  98   1              for(a=0;a<8;a++)
+  99   1              {
+ 100   2                      SER=dat>>7;
+ 101   2                      dat<<=1;
+ 102   2      
+ 103   2                      SRCLK=1;
+ 104   2                      _nop_();
+ 105   2                      _nop_();
+ 106   2                      SRCLK=0;        
+ 107   2              }
+ 108   1      
+ 109   1              RCLK=1;
+ 110   1              _nop_();
+ 111   1              _nop_();
+ 112   1              RCLK=0;
+ 113   1      }
+ 114          /*******************************************************************************
+ 115          * 函数名         : main
+ 116          * 函数功能                 : 主函数
+C51 COMPILER V9.59.0.0   ____________                                                      09/13/2018 21:38:27 PAGE 3   
+
+ 117          * 输入           : 无
+ 118          * 输出           : 无
+ 119          *******************************************************************************/
+ 120          
+ 121          void main()
+ 122          {       
+ 123   1              unsigned char tab, j;
+ 124   1              unsigned int  i;
+ 125   1      
+ 126   1              while(1)
+ 127   1              {       
+ 128   2                      for(i= 0; i<50; i++ )   //两个字之间的扫描间隔时间
+ 129   2                      {
+ 130   3                              for(tab=0;tab<8;tab++)
+ 131   3                              {       
+ 132   4      
+ 133   4                                      Hc595SendByte(0x00);                         //消隐                                                                                                                             
+ 134   4                                      COMMONPORTS     = TAB[tab];                              //输出字码     
+ 135   4                                      Hc595SendByte(CHARCODE[j][tab]);        
+ 136   4                                      delay(2);               
+ 137   4                              }
+ 138   3                               
+ 139   3                      }
+ 140   2                      j++;
+ 141   2                      if(j == 30)
+ 142   2                      {
+ 143   3                              j = 0;
+ 144   3                      }
+ 145   2              }       
+ 146   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    178    ----
+   CONSTANT SIZE    =    248    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

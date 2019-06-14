@@ -1,0 +1,43 @@
+C51 COMPILER V9.57.0.0   2_5_1                                                             05/25/2018 01:44:13 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 2_5_1
+OBJECT MODULE PLACED IN .\Objects\2.5.1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 2.5.1.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\2.5
+                    -.1.lst) OBJECT(.\Objects\2.5.1.obj)
+
+line level    source
+
+   1          #include<reg52.h>                       //52系列单片机头文件
+   2          #define uint unsigned int       //宏定义
+   3          sbit led1=P2^0;                         //声明单片机P1口的第一位
+   4          void delayxms(uint);
+   5          void main()                                     //主函数
+   6          {
+   7   1              while(1)
+   8   1                      {
+   9   2                              led1=0;                                         /*点亮第一个发光二级管*/
+  10   2                              delayxms(500);  
+  11   2                              led1=1;                                         /*关闭第一个发光二级管*/
+  12   2                              delayxms(1000);
+  13   2                      }
+  14   1      }
+  15          void delayxms(uint xms)
+  16                  {   uint i,j;
+  17   1                      for(i=xms;i>0;i--)                      
+  18   1                              for(j=110;j>0;j--);
+  19   1              }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     50    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

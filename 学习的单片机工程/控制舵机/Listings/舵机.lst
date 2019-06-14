@@ -1,0 +1,171 @@
+C51 COMPILER V9.59.0.0   ____                                                              11/21/2018 18:06:45 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE ____
+OBJECT MODULE PLACED IN .\Objects\���.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ���.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\���
+                    -.lst) TABS(2) OBJECT(.\Objects\���.obj)
+
+line level    source
+
+   1          #include<reg52.h>           //52系列单片机头文件
+   2          
+   3          typedef unsigned int u16;   //对数据类型进行声明
+   4          typedef unsigned char u8;
+   5          
+   6          sbit LSA=P2^2;  //对单片机io口进行声明
+   7          sbit LSB=P2^3;
+   8          sbit LSC=P2^4;
+   9          sbit pwm=P3^0;  //pwm信号输出
+  10          sbit jia=P3^2;  //角度增加按键i/o口
+  11          sbit jan=P3^3;  //角度减少按键i/o口
+  12          
+  13          u8 count; //0.5ms次数标识
+  14          u8 jd;    //角度标识
+  15          u8 code smgduan[]={0x3f,0x06,0x5b,0x4f,
+  16                             0x66,0x6d,0x7d,0x07,
+  17                             0x7f,0x6f,0x77,0x7c,
+  18                             0x39,0x5e,0x79,0x71};//显示0~F的值
+  19          
+  20          void delay(u16 i) //延时函数
+  21          {
+  22   1        u16 j,k;
+  23   1        for(j=i;j>0;j--)
+  24   1          for(k=110;k>0;k--);
+  25   1      }
+  26          
+  27          void Time0_Init() //定时器初始化
+  28          {
+  29   1        TMOD=0X01;      //定时器0的工作方式为1
+  30   1        IE=0X82;  //
+  31   1        TH0=0XFE;
+  32   1        TL0=0X33; //11.0592MHz晶振，0.5ms
+  33   1        TR0=1;    //定时器开始
+  34   1      }
+  35          
+  36          void Time0_Int() interrupt 1  //中断程序
+  37          {
+  38   1        TH0=0XFE;         //重新赋值
+  39   1        TL0=0X33;
+  40   1        if(count<jd)      //判断0.5ms次数是否小于角度标识
+  41   1          pwm=1;          //确实小于pwm输出高电平
+  42   1        else
+  43   1          pwm=0;          //大于则输出低电平
+  44   1        count=(count+1);  //0.5ms次数加一
+  45   1        count=count%40;   //次数始终保持40，即保持周期为20ms
+  46   1      }
+  47          
+  48          void keyscan()  //按键扫描
+  49          {
+  50   1        if(jia==0)    //角度增加按键是否按下
+  51   1        {
+  52   2          delay(10);  //按下延时，消抖
+  53   2          if(jia==0)  //确实按下
+  54   2          {
+C51 COMPILER V9.59.0.0   ____                                                              11/21/2018 18:06:45 PAGE 2   
+
+  55   3            jd++;     //角度标识加1
+  56   3            count=0;    //按键按下则20ms周期重新开始
+  57   3            if(jd==6)
+  58   3                jd=5;
+  59   3            while(!jia);//等待按键释放
+  60   3          }
+  61   2        }
+  62   1        
+  63   1        if(jan==0)    //角度减小按键是否按下
+  64   1        {
+  65   2          delay(10);  //按键消抖
+  66   2          if(jan==0)  //再次检测按键是否按下
+  67   2          {
+  68   3            jd--;     //角度标识减1
+  69   3            count=0;
+  70   3            if(jd==0)
+  71   3              jd=1;
+  72   3            while(!jan);  //等待按键释放
+  73   3          }
+  74   2        }
+  75   1      }
+  76          
+  77          void display()  //数码管显示函数
+  78          {
+  79   1        u8 bai,shi,ge;
+  80   1        switch(jd)
+  81   1        {
+  82   2          case (1):           //为1，角度为0，前三个数码管显示000
+  83   2                 bai=0;
+  84   2                 shi=0;
+  85   2                 ge=0;
+  86   2                 break;
+  87   2          
+  88   2          case (2):
+  89   2                 bai=0;
+  90   2                 shi=4;
+  91   2                 ge=5;
+  92   2                 break;
+  93   2          
+  94   2          case (3):
+  95   2                 bai=0;
+  96   2                 shi=9;
+  97   2                 ge=0;
+  98   2                 break;
+  99   2          
+ 100   2          case (4):
+ 101   2                 bai=1;
+ 102   2                 shi=3;
+ 103   2                 ge=5;
+ 104   2                 break;
+ 105   2          
+ 106   2          case (5):           //为5，角度为180，前三个数码管显示180
+ 107   2                 bai=1;
+ 108   2                 shi=8;
+ 109   2                 ge=0;
+ 110   2                 break;
+ 111   2        }
+ 112   1      
+ 113   1        LSA=0;
+ 114   1        LSB=1;
+ 115   1        LSC=0;    //显示第0位
+ 116   1        P0=smgduan[bai];  //发送段码
+C51 COMPILER V9.59.0.0   ____                                                              11/21/2018 18:06:45 PAGE 3   
+
+ 117   1        delay(5); //延时
+ 118   1        
+ 119   1        LSA=1;
+ 120   1        LSB=0;
+ 121   1        LSC=0;    //显示第1位
+ 122   1        P0=smgduan[shi];
+ 123   1        delay(5);
+ 124   1        
+ 125   1        LSA=0;
+ 126   1        LSB=0;
+ 127   1        LSC=0;    //显示第2位
+ 128   1        P0=smgduan[ge];
+ 129   1        delay(5);
+ 130   1        
+ 131   1      }
+ 132          
+ 133          void main()
+ 134          {
+ 135   1        jd=1;         //角度标识
+ 136   1        count=0;      //0.5ms次数标识
+ 137   1        Time0_Init(); //定时器初始化
+ 138   1        while(1)
+ 139   1        {
+ 140   2          keyscan();  //按键扫描
+ 141   2          display();  //数码管显示
+ 142   2        }
+ 143   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    265    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

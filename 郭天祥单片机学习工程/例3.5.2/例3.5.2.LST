@@ -1,0 +1,25 @@
+C51 COMPILER V9.52.0.0   __3_5_2                                                           07/08/2018 21:56:16 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE __3_5_2
+OBJECT MODULE PLACED IN 절3.5.2.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 절3.5.2.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+*** WARNING C280 IN LINE 33 OF �3.5.2.c: 'shi': unreferenced local variable
+*** WARNING C280 IN LINE 33 OF �3.5.2.c: 'ge': unreferenced local variable
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    200    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

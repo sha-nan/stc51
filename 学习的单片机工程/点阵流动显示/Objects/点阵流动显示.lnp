@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\点阵流动显示.obj" 
+TO ".\Objects\点阵流动显示" 
+PRINT(".\Listings\点阵流动显示.m51") RAMSIZE(256) 

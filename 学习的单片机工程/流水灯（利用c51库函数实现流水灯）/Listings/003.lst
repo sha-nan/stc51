@@ -1,0 +1,46 @@
+C51 COMPILER V9.57.0.0   003                                                               04/21/2018 11:32:06 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE 003
+OBJECT MODULE PLACED IN .\Objects\003.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 003.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\003.l
+                    -st) OBJECT(.\Objects\003.obj)
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define unit unsigned int
+   4          #define uchar unsigned char
+   5          void delayms(unit);
+   6          uchar aa;
+   7          void main()
+   8          {
+   9   1              aa=0x2fe;
+  10   1              while(1)
+  11   1              {
+  12   2                      P2=aa;
+  13   2                      delayms(500);
+  14   2                      aa=_crol_(aa,1);
+  15   2              }
+  16   1      }
+  17          void delayms(unit xms)
+  18          {
+  19   1              unit i,j;
+  20   1              for(i=xms;i>0;i--)
+  21   1                      for(j=110;j>0;j--);
+  22   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     58    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
