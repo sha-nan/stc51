@@ -1,13 +1,15 @@
-C51 COMPILER V9.52.0.0   ________                                                          09/08/2018 15:10:30 PAGE 1   
+C51 COMPILER V9.59.0.0   ________                                                          07/24/2019 12:30:17 PAGE 1   
 
 
-C51 COMPILER V9.52.0.0, COMPILATION OF MODULE ________
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE ________
 OBJECT MODULE PLACED IN 独立按键.OBJ
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 独立按键.c BROWSE DEBUG OBJECTEXTEND
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 独立按键.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
 
 line level    source
 
-   1          #include<reg52.h>       //52系列单片机头文件
+*** WARNING C500 IN LINE 1 OF 独立按键.c: LICENSE ERROR (R207(3): REGISTRY READ ERROR)
+
+   1          #include<reg52.h> //52系列单片机头文件
    2          #include<intrins.h>
    3          #define uint unsigned int//对数据类型进行声明
    4          #define uchar unsigned char
@@ -21,96 +23,96 @@ line level    source
   12          uchar code smgduan[]={0x30,0x38,0x3f,0x3e,0x79,0x6e,0x3f,0x3e};
   13          uint i,j;
   14          void delayxms(uint xms)//延时函数，输入xms毫秒即延时xms
-  15                  {       
-  16   1                      for(i=xms;i>0;i--)
-  17   1                              for(j=110;j>0;j--);
-  18   1              }
-  19                  
+  15            { 
+  16   1          for(i=xms;i>0;i--)
+  17   1            for(j=110;j>0;j--);
+  18   1        }
+  19            
   20          void DigDisplay()//动态数码管扫描函数，循环扫描8个数码管显示
   21          {
-  22   1              uchar i;
-  23   1              for(i=0;i<8;i++)
-  24   1              {
-  25   2                      switch(i)        //位选，选择点亮的数码管，
-  26   2                      {
-  27   3                              case(7):
-  28   3                                      LSA=0;LSB=0;LSC=0; break;//显示第0位
-  29   3                              case(6):
-  30   3                                      LSA=1;LSB=0;LSC=0; break;//显示第1位
-  31   3                              case(5):
-  32   3                                      LSA=0;LSB=1;LSC=0; break;//显示第2位
-  33   3                              case(4):
-  34   3                                      LSA=1;LSB=1;LSC=0; break;//显示第3位
-  35   3                              case(3):
-  36   3                                      LSA=0;LSB=0;LSC=1; break;//显示第4位
-  37   3                              case(2):
-  38   3                                      LSA=1;LSB=0;LSC=1; break;//显示第5位
-  39   3                              case(1):
-  40   3                                      LSA=0;LSB=1;LSC=1; break;//显示第6位
-  41   3                              case(0):
-  42   3                                      LSA=1;LSB=1;LSC=1; break;//显示第7位    
-  43   3                              
-  44   3                      }               
-  45   2                      P0=smgduan[i];//发送段码
-  46   2                      delayxms(500);  //间隔一段时间扫描      
-  47   2                      P0=0x00;      //消隐
-  48   2              }
+  22   1        uchar i;
+  23   1        for(i=0;i<8;i++)
+  24   1        {
+  25   2          switch(i)  //位选，选择点亮的数码管，
+  26   2          {
+  27   3            case(7):
+  28   3              LSA=0;LSB=0;LSC=0; break;//显示第0位
+  29   3            case(6):
+  30   3              LSA=1;LSB=0;LSC=0; break;//显示第1位
+  31   3            case(5):
+  32   3              LSA=0;LSB=1;LSC=0; break;//显示第2位
+  33   3            case(4):
+  34   3              LSA=1;LSB=1;LSC=0; break;//显示第3位
+  35   3            case(3):
+  36   3              LSA=0;LSB=0;LSC=1; break;//显示第4位
+  37   3            case(2):
+  38   3              LSA=1;LSB=0;LSC=1; break;//显示第5位
+  39   3            case(1):
+  40   3              LSA=0;LSB=1;LSC=1; break;//显示第6位
+  41   3            case(0):
+  42   3              LSA=1;LSB=1;LSC=1; break;//显示第7位  
+  43   3            
+  44   3          }   
+  45   2          P0=smgduan[i];//发送段码
+  46   2          delayxms(500);  //间隔一段时间扫描  
+  47   2          P0=0x00;      //消隐
+  48   2        }
   49   1      }
   50          
   51          
   52          void key()//按键处理函数，判断按键k1是否按下
   53          {
-  54   1              
-  55   1                      if(k1==0);//检测k1是否按下
-C51 COMPILER V9.52.0.0   ________                                                          09/08/2018 15:10:30 PAGE 2   
+  54   1        
+C51 COMPILER V9.59.0.0   ________                                                          07/24/2019 12:30:17 PAGE 2   
 
-  56   1                      {
-  57   2                              delayxms(10);//消除抖动一般大约10ms
-  58   2                              if(k1==0)//再次判断按键是否按下
-  59   2                                      {       
-  60   3                                              uchar i;
-  61   3                                              led=0xfe;
-  62   3                                              for(i=0;i<7;i++)
-  63   3                                                      {
-  64   4                                                              led=_crol_(led,1);                      //循环左移
-  65   4                                                              delayxms(100);
-  66   4                                                      }
-  67   3                                      
-  68   3                                              for(i=0;i<7;i++)
-  69   3                                                      {
-  70   4                                                              led=_cror_(led,1);//循环右移
-  71   4                                                              delayxms(100);//延时100ms
-  72   4                                                      }
-  73   3                                      while(!k1);
-  74   3                                      }
-  75   2                      
-  76   2                      }
-  77   1                      
-  78   1                      if(k2==0);
-  79   1                      {
-  80   2                              delayxms(10);
-  81   2                              if(k2==0)
-  82   2                              {
-  83   3                                      DigDisplay();
-  84   3                              }
-  85   2                      while(!k2);                     
-  86   2                      }
-  87   1                      
+  55   1          if(k1==0);//检测k1是否按下
+  56   1          {
+  57   2            delayxms(10);//消除抖动一般大约10ms
+  58   2            if(k1==0)//再次判断按键是否按下
+  59   2              { 
+  60   3                uchar i;
+  61   3                led=0xfe;
+  62   3                for(i=0;i<7;i++)
+  63   3                  {
+  64   4                    led=_crol_(led,1);      //循环左移
+  65   4                    delayxms(100);
+  66   4                  }
+  67   3              
+  68   3                for(i=0;i<7;i++)
+  69   3                  {
+  70   4                    led=_cror_(led,1);//循环右移
+  71   4                    delayxms(100);//延时100ms
+  72   4                  }
+  73   3              while(!k1);
+  74   3              }
+  75   2          
+  76   2          }
+  77   1          
+  78   1          if(k2==0);
+  79   1          {
+  80   2            delayxms(10);
+  81   2            if(k2==0)
+  82   2            {
+  83   3              DigDisplay();
+  84   3            }
+  85   2          while(!k2);     
+  86   2          }
+  87   1          
   88   1      }
   89          
   90          
   91          void main()
   92          {
-  93   1              while(1)
-  94   1                      {
-  95   2                                      key();//按键处理函数
-  96   2                              
-  97   2                      }
+  93   1        while(1)
+  94   1          {
+  95   2              key();//按键处理函数
+  96   2            
+  97   2          }
   98   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    251    ----
+   CODE SIZE        =    270    ----
    CONSTANT SIZE    =      8    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -120,4 +122,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,6 +1,6 @@
 #include<reg52.h>
 #define uchar unsigned char
-#define uint unsigned int
+#define uint  unsigned int
 
 uchar flag,a,i,SUBF;
 uchar code table[]="I get ";

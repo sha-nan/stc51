@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   ________________                                                  12/03/2018 21:00:16 PAGE 1   
+C51 COMPILER V9.59.0.0   ________________                                                  09/03/2019 21:28:22 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE ________________
@@ -8,9 +8,11 @@ COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 串行口方式一编程.c OPTIMIZE(8,SP
 
 line level    source
 
+*** WARNING C500 IN LINE 1 OF 串行口方式一编程.c: LICENSE ERROR (R207(3): REGISTRY READ ERROR)
+
    1          #include<reg52.h>
    2          #define uchar unsigned char
-   3          #define uint unsigned int
+   3          #define uint  unsigned int
    4          
    5          uchar flag,a,i,SUBF;
    6          uchar code table[]="I get ";
@@ -61,8 +63,8 @@ line level    source
   51   1        flag=1;
   52   1      }
 
+C51 COMPILER V9.59.0.0   ________________                                                  09/03/2019 21:28:22 PAGE 2   
 
-C51 COMPILER V9.59.0.0   ________________                                                  12/03/2018 21:00:16 PAGE 2   
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =     89    ----
@@ -75,4 +77,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    12/03/2018  21:00:16  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    09/03/2019  21:28:22  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -27,13 +27,14 @@ LINK MAP OF MODULE:  .\Objects\串行口方式一编程 (?C_STARTUP)
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     0016H     UNIT         ?PR?INIT?________________
-            CODE    0019H     0009H     UNIT         ?PR?SER?________________
-                    0022H     0001H                  *** GAP ***
+                    0003H     0020H                  *** GAP ***
             CODE    0023H     0003H     ABSOLUTE     
-            CODE    0026H     003AH     UNIT         ?PR?MAIN?________________
-            CODE    0060H     000CH     UNIT         ?C_C51STARTUP
-            CODE    006CH     0007H     UNIT         ?CO?________________
+                    0026H     07DAH                  *** GAP ***
+            CODE    0800H     003AH     UNIT         ?PR?MAIN?________________
+            CODE    083AH     0016H     UNIT         ?PR?INIT?________________
+            CODE    0850H     000CH     UNIT         ?C_C51STARTUP
+            CODE    085CH     0009H     UNIT         ?PR?SER?________________
+            CODE    0865H     0007H     UNIT         ?CO?________________
 
 
 
@@ -58,10 +59,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\串行口方式一编程 (?C_STARTUP)
   ----------------------------------
 
   -------         MODULE        ?C_STARTUP
-  C:0060H         SEGMENT       ?C_C51STARTUP
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/03/2018  21:00:16  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/03/2019  21:28:22  PAGE 2
 
 
+  C:0850H         SEGMENT       ?C_C51STARTUP
   I:000CH         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
@@ -71,7 +72,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\串行口方式一编程 (?C_STARTUP)
   N:0000H         SYMBOL        IBPSTACK
   N:0100H         SYMBOL        IBPSTACKTOP
   N:0080H         SYMBOL        IDATALEN
-  C:0063H         SYMBOL        IDATALOOP
+  C:0853H         SYMBOL        IDATALOOP
   N:0000H         SYMBOL        PBPSTACK
   N:0100H         SYMBOL        PBPSTACKTOP
   N:0000H         SYMBOL        PDATALEN
@@ -80,18 +81,18 @@ SYMBOL TABLE OF MODULE:  .\Objects\串行口方式一编程 (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-  C:0060H         SYMBOL        STARTUP1
+  C:0850H         SYMBOL        STARTUP1
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
   N:0000H         SYMBOL        XDATASTART
   C:0000H         LINE#         126
-  C:0060H         LINE#         133
-  C:0062H         LINE#         134
-  C:0063H         LINE#         135
-  C:0064H         LINE#         136
-  C:0066H         LINE#         185
-  C:0069H         LINE#         196
+  C:0850H         LINE#         133
+  C:0852H         LINE#         134
+  C:0853H         LINE#         135
+  C:0854H         LINE#         136
+  C:0856H         LINE#         185
+  C:0859H         LINE#         196
   -------         ENDMOD        ?C_STARTUP
 
   -------         MODULE        ________________
@@ -99,79 +100,86 @@ SYMBOL TABLE OF MODULE:  .\Objects\串行口方式一编程 (?C_STARTUP)
   D:0090H         PUBLIC        P1
   D:00B0H         PUBLIC        P3
   B:00A8H.7       PUBLIC        EA
-  C:006CH         PUBLIC        table
+  C:0865H         PUBLIC        table
   D:00A8H         PUBLIC        IE
   B:00A8H.4       PUBLIC        ES
   D:00B8H         PUBLIC        IP
   B:0098H.0       PUBLIC        RI
   D:0008H         PUBLIC        flag
   B:0098H.1       PUBLIC        TI
-  C:0026H         PUBLIC        main
+  C:0800H         PUBLIC        main
   D:0009H         PUBLIC        SUBF
   D:0099H         PUBLIC        SBUF
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  C:0003H         PUBLIC        init
-  C:0019H         PUBLIC        ser
+  C:083AH         PUBLIC        init
+  C:085CH         PUBLIC        ser
   D:008DH         PUBLIC        TH1
   B:0098H.7       PUBLIC        SM0
   B:0098H.6       PUBLIC        SM1
   D:008BH         PUBLIC        TL1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/03/2019  21:28:22  PAGE 3
+
+
   B:0088H.6       PUBLIC        TR1
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/03/2018  21:00:16  PAGE 3
-
-
   D:000AH         PUBLIC        a
   B:0098H.4       PUBLIC        REN
   D:00C8H         PUBLIC        T2CON
   D:000BH         PUBLIC        i
   D:00D0H         PUBLIC        PSW
   -------         PROC          INIT
-  C:0003H         LINE#         8
-  C:0003H         LINE#         9
-  C:0003H         LINE#         10
-  C:0006H         LINE#         11
-  C:0009H         LINE#         12
-  C:000CH         LINE#         13
-  C:000EH         LINE#         14
-  C:0010H         LINE#         15
-  C:0012H         LINE#         16
-  C:0014H         LINE#         17
-  C:0016H         LINE#         18
-  C:0018H         LINE#         19
+  C:083AH         LINE#         8
+  C:083AH         LINE#         9
+  C:083AH         LINE#         10
+  C:083DH         LINE#         11
+  C:0840H         LINE#         12
+  C:0843H         LINE#         13
+  C:0845H         LINE#         14
+  C:0847H         LINE#         15
+  C:0849H         LINE#         16
+  C:084BH         LINE#         17
+  C:084DH         LINE#         18
+  C:084FH         LINE#         19
   -------         ENDPROC       INIT
   -------         PROC          MAIN
-  C:0026H         LINE#         21
-  C:0026H         LINE#         22
-  C:0026H         LINE#         23
-  C:0029H         LINE#         24
-  C:0029H         LINE#         25
-  C:0029H         LINE#         26
-  C:002FH         LINE#         27
-  C:002FH         LINE#         28
-  C:0031H         LINE#         30
-  C:003EH         LINE#         31
-  C:003EH         LINE#         32
-  C:0046H         LINE#         33
-  C:0049H         LINE#         34
-  C:004DH         LINE#         35
-  C:0051H         LINE#         37
-  C:0054H         LINE#         38
-  C:0057H         LINE#         39
-  C:0059H         LINE#         40
-  C:005BH         LINE#         41
-  C:005EH         LINE#         43
-  C:005EH         LINE#         44
+  C:0800H         LINE#         21
+  C:0800H         LINE#         22
+  C:0800H         LINE#         23
+  C:0803H         LINE#         24
+  C:0803H         LINE#         25
+  C:0803H         LINE#         26
+  C:0809H         LINE#         27
+  C:0809H         LINE#         28
+  C:080BH         LINE#         30
+  C:0818H         LINE#         31
+  C:0818H         LINE#         32
+  C:0820H         LINE#         33
+  C:0823H         LINE#         34
+  C:0827H         LINE#         35
+  C:082BH         LINE#         37
+  C:082EH         LINE#         38
+  C:0831H         LINE#         39
+  C:0833H         LINE#         40
+  C:0835H         LINE#         41
+  C:0838H         LINE#         43
+  C:0838H         LINE#         44
   -------         ENDPROC       MAIN
   -------         PROC          SER
-  C:0019H         LINE#         47
-  C:0019H         LINE#         49
-  C:001BH         LINE#         50
-  C:001EH         LINE#         51
-  C:0021H         LINE#         52
+  C:085CH         LINE#         47
+  C:085CH         LINE#         49
+  C:085EH         LINE#         50
+  C:0861H         LINE#         51
+  C:0864H         LINE#         52
   -------         ENDPROC       SER
   -------         ENDMOD        ________________
 
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0072H BYTE ( 5%) *
+******************************************************************************
+
 Program Size: data=13.0 xdata=0 code=114
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/03/2019  21:28:22  PAGE 4
+
+
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
