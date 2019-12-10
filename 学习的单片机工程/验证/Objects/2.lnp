@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\ÖÐ¶Ï.obj" 
+TO ".\Objects\2" 
+PRINT(".\Listings\2.m51") RAMSIZE(256) 

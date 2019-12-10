@@ -1,7 +1,8 @@
 #include<reg52.h>
-#define led P2
+//#define led P2
+sbit LED=P0^4;
 void main()
 {
-	led=0xaa;
+	LED=1;
 	while(1);
 }
