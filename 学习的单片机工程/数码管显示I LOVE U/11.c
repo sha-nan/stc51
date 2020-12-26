@@ -41,7 +41,7 @@ void DigDisplay()
 			
 		}		
 		P0=smgduan[i];//发送段码
-		delayxms(500);  //间隔一段时间扫描	
+		delayxms(1);  //间隔一段时间扫描	
 		P0=0x00;      //消隐
 	}
 }

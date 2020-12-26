@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    09/15/2019  18:49:22  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    03/17/2020  22:18:45  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -12,6 +12,7 @@ MEMORY MODEL: SMALL
 INPUT MODULES INCLUDED:
   .\Objects\STARTUP.obj (?C_STARTUP)
   .\Objects\led.obj (LED)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
 
 
 LINK MAP OF MODULE:  .\Objects\led (?C_STARTUP)
@@ -22,13 +23,15 @@ LINK MAP OF MODULE:  .\Objects\led (?C_STARTUP)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            IDATA   0008H     0001H     UNIT         ?STACK
+            DATA    0008H     0001H     UNIT         ?DT?LED
+            IDATA   0009H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-                    0003H     07FDH                  *** GAP ***
-            CODE    0800H     000CH     UNIT         ?C_C51STARTUP
-            CODE    080CH     0003H     UNIT         ?PR?MAIN?LED
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     0012H     UNIT         ?PR?UART_INIT?LED
+            CODE    00A1H     0010H     UNIT         ?PR?MAIN?LED
+            CODE    00B1H     0004H     UNIT         ?C_INITSEG
 
 
 
@@ -40,6 +43,10 @@ SEGMENT
 ---------------------
 ?C_C51STARTUP
   +--> ?PR?MAIN?LED
+  +--> ?C_INITSEG
+
+?PR?MAIN?LED
+  +--> ?PR?UART_INIT?LED
 
 
 
@@ -49,9 +56,12 @@ SYMBOL TABLE OF MODULE:  .\Objects\led (?C_STARTUP)
   ----------------------------------
 
   -------         MODULE        ?C_STARTUP
-  C:0800H         SEGMENT       ?C_C51STARTUP
-  I:0008H         SEGMENT       ?STACK
+  C:0003H         SEGMENT       ?C_C51STARTUP
+  I:0009H         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/17/2020  22:18:45  PAGE 2
+
+
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
   D:0083H         SYMBOL        DPH
@@ -59,10 +69,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\led (?C_STARTUP)
   N:0000H         SYMBOL        IBPSTACK
   N:0100H         SYMBOL        IBPSTACKTOP
   N:0080H         SYMBOL        IDATALEN
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/15/2019  18:49:22  PAGE 2
-
-
-  C:0803H         SYMBOL        IDATALOOP
+  C:0006H         SYMBOL        IDATALOOP
   N:0000H         SYMBOL        PBPSTACK
   N:0100H         SYMBOL        PBPSTACKTOP
   N:0000H         SYMBOL        PDATALEN
@@ -71,18 +78,18 @@ SYMBOL TABLE OF MODULE:  .\Objects\led (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-  C:0800H         SYMBOL        STARTUP1
+  C:0003H         SYMBOL        STARTUP1
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
   N:0000H         SYMBOL        XDATASTART
   C:0000H         LINE#         126
-  C:0800H         LINE#         133
-  C:0802H         LINE#         134
-  C:0803H         LINE#         135
-  C:0804H         LINE#         136
-  C:0806H         LINE#         185
-  C:0809H         LINE#         196
+  C:0003H         LINE#         133
+  C:0005H         LINE#         134
+  C:0006H         LINE#         135
+  C:0007H         LINE#         136
+  C:0009H         LINE#         185
+  C:000CH         LINE#         196
   -------         ENDMOD        ?C_STARTUP
 
   -------         MODULE        LED
@@ -92,23 +99,47 @@ SYMBOL TABLE OF MODULE:  .\Objects\led (?C_STARTUP)
   D:00B0H         PUBLIC        P3
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:080CH         PUBLIC        main
+  B:0098H.0       PUBLIC        RI
+  C:00A1H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  D:0087H         PUBLIC        PCON
   D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  B:00A0H.0       PUBLIC        led1
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  C:008FH         PUBLIC        uart_init
+  B:0088H.6       PUBLIC        TR1
   D:00C8H         PUBLIC        T2CON
+  D:0008H         PUBLIC        j
   D:00D0H         PUBLIC        PSW
+  -------         PROC          UART_INIT
+  C:008FH         LINE#         59
+  C:008FH         LINE#         60
+  C:008FH         LINE#         61
+  C:0092H         LINE#         62
+  C:0095H         LINE#         63
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/17/2020  22:18:45  PAGE 3
+
+
+  C:0098H         LINE#         64
+  C:009AH         LINE#         65
+  C:009DH         LINE#         66
+  C:00A0H         LINE#         67
+  -------         ENDPROC       UART_INIT
   -------         PROC          MAIN
-  C:080CH         LINE#         3
-  C:080CH         LINE#         4
-  C:080CH         LINE#         5
-  C:080EH         LINE#         6
+  C:00A1H         LINE#         69
+  C:00A1H         LINE#         70
+  C:00A1H         LINE#         71
+  C:00A4H         LINE#         72
+  C:00A4H         LINE#         73
+  C:00A4H         LINE#         74
+  C:00A7H         LINE#         75
+  C:00A9H         LINE#         76
+  C:00ACH         LINE#         77
+  C:00AFH         LINE#         78
   -------         ENDPROC       MAIN
   -------         ENDMOD        LED
 
-******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0012H BYTE ( 0%) *
-******************************************************************************
-
-Program Size: data=9.0 xdata=0 code=18
+Program Size: data=10.0 xdata=0 code=181
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
